@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- cdn bootstrap -->
+    <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.css">
+    <style>
+
+    .axis path, .axis line
+   {
+       fill: none;
+       stroke: #777;
+       shape-rendering: crispEdges;
+   }
+   
+   .axis text
+   {
+       font-family: 'Arial';
+       font-size: 13px;
+   }
+   .tick
+   {
+       stroke-dasharray: 1, 2;
+   }
+   .bar
+   {
+       fill: FireBrick;
+   }
+           
+  .graphs {
+    position: absolute;
+    top:10%;
+    left: 10%;
+    border: 1px solid red;
+  }
+  
+  .show-graph {
+    opacity: 1;
+    left:30px;
+    position: absolute;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+  }
+
+  .hide-graph {
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+      position: absolute;
+      opacity: 0; /*or bottom, top, right*/
+      left:-100px;
+  }  
+
+    </style>
+  </head>
+  <body ng-app="charts" ng-controller="chartsCTRL">
+    <h1><%= header %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <div class="container-fluid col-md-5 col-md-offset-3" style="margin-bottom: 20px;">
+    
+    <p href="#"  class="active btn btn-default" ng-click="isActive = !isActive">Employment figures</p>
+    <p href="#" class="btn btn-default " ng-click="isActive = !isActive">Employment percentage in group</p>
+
+
+    <div style="position: relative;display: block;height: 500px">
+        <div ng-class="{ 'show-graph': !isActive, 'hide-graph': isActive }">
+         <div class="well col-md-9 col-md-offset-2" style="margin-top:20px;">
+                  Employment figures below
+            </div>
+              <svg class="chart" id="visualisation" width="500" height="300" ></svg>
+        </div>
+          <div  class="hide-graph" ng-class="{ 'show-graph': isActive, 'hide-graph': !isActive }" style="margin-top:20px;" >
+          <div class="well col-md-9 col-md-offset-2">
+                  Employment Percentage distribution in group
+          </div><div id="pie"></div></div>
+    </div>
+
+
+    </div>
+		<!-- jquery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+     <!--bootrsrap javascript -->
+      <script type="text/javascript" src="https://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- Angular -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+      <script>var angApp = angular.module("charts",[]);</script>
+      <script src="javascripts/charts.js"></script>
+      <script src="javascripts/column_chart.js"></script>
+      <script src="javascripts/piechart.js"></script>
+  </body>
+</html>
